@@ -19,7 +19,7 @@ namespace AutoUpdaterTest
         {
             //Uncomment below line to see russian version
 
-            //AutoUpdater.CurrentCulture = CultureInfo.CreateSpecificCulture("ru");
+            AutoUpdater.CurrentCulture = CultureInfo.CreateSpecificCulture("es");
 
             //If you want to open download page when user click on download button uncomment below line.
 
@@ -87,7 +87,7 @@ namespace AutoUpdaterTest
 
         private void buttonCheckForUpdate_Click(object sender, EventArgs e)
         {
-            AutoUpdater.Start("http://rbsoft.org/updates/AutoUpdaterTest.xml");
+            AutoUpdater.Start("file://C:/Users/Miguel/Desktop/UpdateManifest.xml");
         }
     }
 }

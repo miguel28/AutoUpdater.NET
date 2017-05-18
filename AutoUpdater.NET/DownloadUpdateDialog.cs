@@ -6,6 +6,10 @@ using System.Net;
 using System.IO;
 using System.Diagnostics;
 using System.Reflection;
+using System.Security.Cryptography;
+using System.Security.Cryptography.X509Certificates;
+using System.Globalization;
+using RSAFileSignatures;
 
 namespace AutoUpdaterDotNET
 {
@@ -17,11 +21,14 @@ namespace AutoUpdaterDotNET
 
         private WebClient _webClient;
 
-        public DownloadUpdateDialog(string downloadURL)
+        private string _signature;
+
+        public DownloadUpdateDialog(string downloadURL, string expected_signature)
         {
             InitializeComponent();
 
             _downloadURL = downloadURL;
+            _signature = expected_signature;
         }
 
         private void DownloadUpdateDialogLoad(object sender, EventArgs e)
@@ -48,6 +55,32 @@ namespace AutoUpdaterDotNET
         {
             if (!e.Cancelled)
             {
+                if (!File.Exists("Certificates\\UpdatesSignaturePubK.pem"))
+                    return;
+
+                try
+                {
+                    byte[] zipdata = File.ReadAllBytes(_tempPath);
+                    RSACryptoServiceProvider csp = RSASignatures.ReadRSAPublicKeyPem("Certificates\\UpdatesSignaturePubK.pem");
+                    bool hashValid = RSASignatures.Verify(zipdata, _signature, csp);
+
+                    if (!hashValid)
+                    {
+                        Close();
+                        var resources = new System.ComponentModel.ComponentResourceManager(this.GetType());
+                        string title = resources.GetString("SignatureError", CultureInfo.CurrentCulture);
+                        string msg = resources.GetString("SignatureErrorDesc", CultureInfo.CurrentCulture);
+                        MessageBox.Show(msg, title, 
+                            MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
+                        return;
+                    }
+                }
+                catch (Exception)
+                {
+                    return;
+                }
+
                 var processStartInfo = new ProcessStartInfo {FileName = _tempPath, UseShellExecute = true};
                 var extension = Path.GetExtension(_tempPath);
                 if (extension != null && extension.ToLower().Equals(".zip"))
@@ -58,7 +91,7 @@ namespace AutoUpdaterDotNET
                     {
                         UseShellExecute = true,
                         FileName = installerPath,
-                        Arguments = $"\"{_tempPath}\" \"{Assembly.GetEntryAssembly().Location}\""
+                        Arguments = string.Format("\"{0}\" \"{1}\"", _tempPath, Assembly.GetEntryAssembly().Location)
                     };
                 }
                 try

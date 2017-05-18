@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26228.4
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoUpdater.NET", "AutoUpdater.NET\AutoUpdater.NET.csproj", "{FB9E7E6B-B19F-4F37-A708-2996190CEF13}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -11,6 +11,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoUpdaterTest", "AutoUpdaterTest\AutoUpdaterTest.csproj", "{FD5AE762-C630-49F8-B814-FCF70E7838D1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZipExtractor", "ZipExtractor\ZipExtractor.csproj", "{91DE558C-6DB8-429B-A069-C0491DCFF15B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RSAFileSignatures", "RSAFileSignatures\RSAFileSignatures.csproj", "{E1600D45-DCAA-4BD5-807B-67C856B16138}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignUpdate", "SignUpdate\SignUpdate.csproj", "{912D7198-FF4B-43FF-AE22-E3BFFB88A752}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -56,6 +60,28 @@ Global
 		{91DE558C-6DB8-429B-A069-C0491DCFF15B}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{91DE558C-6DB8-429B-A069-C0491DCFF15B}.Release|x86.ActiveCfg = Release|Any CPU
 		{91DE558C-6DB8-429B-A069-C0491DCFF15B}.Release|x86.Build.0 = Release|Any CPU
+		{E1600D45-DCAA-4BD5-807B-67C856B16138}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E1600D45-DCAA-4BD5-807B-67C856B16138}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E1600D45-DCAA-4BD5-807B-67C856B16138}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{E1600D45-DCAA-4BD5-807B-67C856B16138}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{E1600D45-DCAA-4BD5-807B-67C856B16138}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{E1600D45-DCAA-4BD5-807B-67C856B16138}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E1600D45-DCAA-4BD5-807B-67C856B16138}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E1600D45-DCAA-4BD5-807B-67C856B16138}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{E1600D45-DCAA-4BD5-807B-67C856B16138}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{E1600D45-DCAA-4BD5-807B-67C856B16138}.Release|x86.ActiveCfg = Release|Any CPU
+		{912D7198-FF4B-43FF-AE22-E3BFFB88A752}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{912D7198-FF4B-43FF-AE22-E3BFFB88A752}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{912D7198-FF4B-43FF-AE22-E3BFFB88A752}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{912D7198-FF4B-43FF-AE22-E3BFFB88A752}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{912D7198-FF4B-43FF-AE22-E3BFFB88A752}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{912D7198-FF4B-43FF-AE22-E3BFFB88A752}.Debug|x86.Build.0 = Debug|Any CPU
+		{912D7198-FF4B-43FF-AE22-E3BFFB88A752}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{912D7198-FF4B-43FF-AE22-E3BFFB88A752}.Release|Any CPU.Build.0 = Release|Any CPU
+		{912D7198-FF4B-43FF-AE22-E3BFFB88A752}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{912D7198-FF4B-43FF-AE22-E3BFFB88A752}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{912D7198-FF4B-43FF-AE22-E3BFFB88A752}.Release|x86.ActiveCfg = Release|Any CPU
+		{912D7198-FF4B-43FF-AE22-E3BFFB88A752}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

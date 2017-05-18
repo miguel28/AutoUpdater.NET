@@ -42,6 +42,8 @@ namespace AutoUpdaterDotNET
 
         internal static String DownloadURL;
 
+        internal static String Signature;
+
         internal static String RegistryLocation;
 
         internal static String AppTitle;
@@ -163,8 +165,10 @@ namespace AutoUpdaterDotNET
 
             InstalledVersion = mainAssembly.GetName().Version;
 
+            WebRequest.DefaultWebProxy.Credentials = CredentialCache.DefaultNetworkCredentials;
             WebRequest webRequest = WebRequest.Create(AppCastURL);
             webRequest.CachePolicy = new HttpRequestCachePolicy(HttpRequestCacheLevel.NoCacheNoStore);
+
 
             WebResponse webResponse;
 
@@ -174,7 +178,8 @@ namespace AutoUpdaterDotNET
             }
             catch (Exception)
             {
-                CheckForUpdateEvent?.Invoke(null);
+                if (null != CheckForUpdateEvent)
+                CheckForUpdateEvent.Invoke(null);
                 return;
             }
 
@@ -188,11 +193,12 @@ namespace AutoUpdaterDotNET
             }
             else
             {
-                CheckForUpdateEvent?.Invoke(null);
+                if (CheckForUpdateEvent != null)
+                    CheckForUpdateEvent.Invoke(null);
                 return;
             }
 
-            XmlNodeList appCastItems = receivedAppCastDocument.SelectNodes("item");
+            XmlNodeList appCastItems = receivedAppCastDocument.SelectNodes("XMLUpdateManifest");
 
             if (appCastItems != null)
                 foreach (XmlNode item in appCastItems)
@@ -227,6 +233,12 @@ namespace AutoUpdaterDotNET
                         {
                             DownloadURL = downloadURL64;
                         }
+                    }
+
+                    XmlNode xmlSignature = item.SelectSingleNode("signature");
+                    if (xmlSignature != null)
+                    {
+                        Signature = xmlSignature.InnerText;
                     }
                 }
 
@@ -274,7 +286,8 @@ namespace AutoUpdaterDotNET
                 }
             }
 
-            CheckForUpdateEvent?.Invoke(args);
+            if (CheckForUpdateEvent != null)
+                CheckForUpdateEvent.Invoke(args);
         }
 
         private static string GetURL(Uri baseUri, XmlNode xmlNode)
@@ -316,7 +329,7 @@ namespace AutoUpdaterDotNET
         /// </summary>
         public static void DownloadUpdate()
         {
-            var downloadDialog = new DownloadUpdateDialog(DownloadURL);
+            var downloadDialog = new DownloadUpdateDialog(DownloadURL, Signature);
 
             try
             {
